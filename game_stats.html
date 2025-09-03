@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet">
+
+    <script>
+      var myData = localStorage['keyName'];
+      localStorage.removeItem( 'keyName' );      // Clear the localStorage
+      alert('user: ' + myData);
+      window.onload = function(){
+          var name = myData;
+          document.getElementById('output').innerHTML = name
+                                }
+      current_user = "/all_users/" + myData
+      current_user_score = "/score_reset/"+ myData
+
+
+      function yourFunction(){
+        var action_src = "/update_user/" + myData 
+        var your_form = document.getElementById('your_form');
+        your_form.action = action_src ;
+                              }
+  
+
+      function openCity(cityName) {
+        var i;
+        var x = document.getElementsByClassName("city");
+        for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";  
+                                        }
+      document.getElementById(cityName).style.display = "block";  
+                                        }
+      </script>
+  </head>
+
+
+  <body>
+    <center>
+      
+      <h2> HELLO<h2 id="output"></h2></h2>
+
+      <div class="w3-bar w3-black">
+        <button onclick="window.location.href='scores'")">SHOW_SCORES</button>
+        <button onclick="window.location.href=current_user")">USER_STATS</button>
+        <button onclick="openCity('UPDATE_STATS')">UPDATE_STATS</button>
+        <button onclick="window.location.href=current_user_score")">RESET_MY_SCORE</button>
+        <button onclick="openCity('DELETE_USER')">DELETE_USER</button>
+        <button onclick="window.location.href='/'")">LOG_OUT</button>  
+      </div>
+
+  
+        <div id="SHOW_SCORES" class="w3-container city">   
+        </div>
+
+        <div id="USER_STATS" class="w3-container city" style="display:none">
+        </div>
+
+
+        <div id="UPDATE_STATS" class="w3-container city" style="display:none">
+
+          <form action="/user_update" name = "searchrecord" method="get" id="category" onsubmit="WriteCookie()">
+            <div class="container">
+              <br>
+                <p1>To update your settings, you need to ENTER your CREDENTIALS below:</p1>
+              <hr>
+                <label for="user"><b>NEW Email:</b></label>
+                <input type="text" placeholder="Enter username" name="new_email" id="new_email" required>
+              <br><br>
+                <label for="password"><b>NEW Passw:</b></label>
+                <input type="password" placeholder="Enter Password" name="new_password" id="new_password" required>
+              <br><br>
+                <label for="user"><b>Username:</b></label>
+                <input type="text" placeholder="Enter username" name="curr_user" id="curr_user" required>
+              <br><br>
+                <label for="password"><b>Password:</b></label>
+                <input type="password" placeholder="Enter Password" name="curr_password" id="curr_password" required>
+              <hr><br>
+                <button type="submit" class="registerbtn">Change settings</button>
+            </div>
+          </form>
+        </div>
+
+
+        <div id="RESET_MY_SCORE" class="w3-container city" style="display:none">
+        </div>
+
+
+        <div id="DELETE_USER" class="w3-container city" style="display:none">
+      
+          <form action="/show_all_usernames" name = "searchrecord" method="get" id="category" onsubmit="WriteCookie()">
+            <div class="container">
+              <hr>
+              <button type="submit" class="registerbtn">SHOW USER LIST</button>
+              <br><br>
+            </div>
+          </form>
+
+          <form action="/delete" name = "searchrecord" method="get" id="category" onsubmit="WriteCookie()">
+            <div class="container">
+          
+                <label for="user"><b>ADMIN:</b></label>
+                <input type="text" placeholder="******" name="admin" id="admin" required>
+              <br>
+              <br>
+                <label for="user"><b>PASSWORD:</b></label>
+                <input type="text" placeholder="******" name="password" id="password" required>  
+              <br>
+              <br>
+                <label for="user"><b>Delete user:</b></label>
+                <input type="text" placeholder="enter name" name="delete_u" id="delete_u" required>
+              <br><br>
+                To delete a user, you need Administrative priveleges -- >
+                <button type="submit" class="registerbtn">EXECUTE</button>
+              <hr>
+            </div>
+          </form>
+        </div>
+
+        <div id="LOG_OUT" class="w3-container city" style="display:none">
+        </div>
+
+
+    </center>
+  </body>
+</html>
+
+
+
+
+
+
+
