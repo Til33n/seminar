@@ -2,7 +2,7 @@ Projekt je sestavljen iz treh glavnih delov. Ti deli morajo delovati posamično,
 da je pričakovan rezultat projekta (mobilna igra) uporaben in praktičen.
 
 1.) back-end 
-Zaledni del je sestavljen iz "server.py" in "database_main.py". V prvei datoteki imamo deklarirane glavne API klice in sicer GET, POST, PUT in DELETE. Druga datoteka 
+Zaledni del je sestavljen iz "server.py" in "database_main.py". V prvei datoteki imamo deklarirane glavne API klice in sicer GET, POST, PUT in DELETE. 
 
 1.1.) back_end - server.py
     1.1.1.)Prvi API se uporabi za nalaganje osnovne spletne strani za ragistracijo/vpis uporabnikov. Na prazni IP naslov (v našem primeru                     http://93.103.156.225) vrne datoteko index.html (glej poglavje 2.1)
@@ -12,9 +12,9 @@ Zaledni del je sestavljen iz "server.py" in "database_main.py". V prvei datoteki
     async def root():
         return FileResponse('index.html', media_type='text/html')
    
-1.1.2.)Drugi API se pa uporabi za preverjanje verodostojnosti podatkov. Na spletni strani index.html, uporabnik vnese svoje uporabniško ime in <br>            
-geslo. Z pritiskom gumba (Submit) se podatki preko URL-ja pošljejo na spodaj podan API. API sproži set funkcij, ki pošljejo poizvedbo v <br> 
-podatkovno bazo prvo se preveri če uporabnik z podanim uporabniškim imenom obstaja, če ja, preveri še geslo. Če sta obe poizvedbi <br>           
+1.1.2.)Drugi API se pa uporabi za preverjanje verodostojnosti podatkov. Na spletni strani index.html, uporabnik vnese svoje uporabniško ime in            
+geslo. Z pritiskom gumba (Submit) se podatki preko URL-ja pošljejo na spodaj podan API. API sproži set funkcij, ki pošljejo poizvedbo v 
+podatkovno bazo prvo se preveri če uporabnik z podanim uporabniškim imenom obstaja, če ja, preveri še geslo. Če sta obe poizvedbi            
 "True", potem API uporabnika preusmeri na spletno stran "game_stats.html" 
 
     ######  GET  #######
@@ -30,7 +30,11 @@ podatkovno bazo prvo se preveri če uporabnik z podanim uporabniškim imenom obs
         return FileResponse('index.html', media_type='text/html')
         
 
-1.1.3.) Tretji API se uporablja izključno za poizvedbo vseh trenutno registriranih uporabnikov spletne strani. Vrne nam uporabniška imena v obliki JSON. Ta poizvedba se<br> uporablja za namen brisanja uporabnikov. Brisanje zapisov/uporabnikov iz podatkovne baze je omogočeno izključno administratorju spletne strani. Ta se mora naknadno<br> prijaviti (glej sklop 1.1.4.)
+1.1.3.) Tretji API se uporablja izključno za poizvedbo vseh trenutno registriranih uporabnikov spletne strani. 
+Vrne nam uporabniška imena v obliki JSON. Ta poizvedba se<br> uporablja za namen brisanja uporabnikov. 
+Brisanje zapisov/uporabnikov iz podatkovne baze je omogočeno izključno administratorju spletne strani. 
+Ta se mora naknadno<br> prijaviti (glej sklop 1.1.4.)
+
      
       ######  GET  ######
       @app.get("/show_all_usernames")  # FETCH PLAYER SCORES
@@ -38,7 +42,10 @@ podatkovno bazo prvo se preveri če uporabnik z podanim uporabniškim imenom obs
           user = show_all_usernames("database")
           return user
 
-1.1.4.) Četrti API se uporablja za namen brisanja uporabnikov iz zapisov podatkovne baze. Če se logiramo v spletno stran user_stats.html, kliknemo "USER DELETE". Tukaj<br> vnesemo uporabniško ime, katerega hočemo izbrisati. Vneseti moramo svoje administratorsko geslo. (POGOJ ZA ADMINISTRATORJA   je obstoječ račun uporabnika - ISTA OSEBA).<br> Z pomočjo "html form" vnesemo tri podatke (String), API preveri če se vsi podatki ujemajo v podatkovnih bazah in izvede izbris uporabnika.<br> 
+1.1.4.) Četrti API se uporablja za namen brisanja uporabnikov iz zapisov podatkovne baze. Če se logiramo v spletno stran user_stats.html, 
+kliknemo "USER DELETE". Tukaj<br> vnesemo uporabniško ime, katerega hočemo izbrisati. Vneseti moramo svoje administratorsko geslo. 
+(POGOJ ZA ADMINISTRATORJA   je obstoječ račun uporabnika - ISTA OSEBA).<br> Z pomočjo "html form" vnesemo tri podatke (String), 
+API preveri če se vsi podatki ujemajo v podatkovnih bazah in izvede izbris uporabnika.<br> 
 
     ######  GET  ######
     @app.get("/delete")   # ADMIN LOGIN and USER DELETE
@@ -56,8 +63,8 @@ podatkovno bazo prvo se preveri če uporabnik z podanim uporabniškim imenom obs
             return {"STATUS": "credentials iINCORRECT"}
 
 
-1.1.5.) Peti API se pa uporablja za posodabljanje uporabniškega računa. Če hoče uporabnik posodobiti svoje geslo in email, mora predtem vnesti<br>    
-svoje uporabniško ime in geslo. Če se po poizvedbi podatki ujemajo, se podatki posodobijo v podatkovni bazi.<br>
+1.1.5.) Peti API se pa uporablja za posodabljanje uporabniškega računa. Če hoče uporabnik posodobiti svoje geslo in email, 
+mora predtem vnesti svoje uporabniško ime in geslo. Če se po poizvedbi podatki ujemajo, se podatki posodobijo v podatkovni bazi.
 
 
         ######  GET  ######
@@ -76,7 +83,10 @@ svoje uporabniško ime in geslo. Če se po poizvedbi podatki ujemajo, se podatki
           return {"STATUS": "Username INCORRECT"}
         
         
-1.1.6.) Šesti API se uporablja za resetiranje uporabniškega dosežka (Ang. Score). Da se ohranja seja oziroma kateri uporabnik je trenutno prijavljen, se v "index.html" uporabi funkcija "WriteCookie". Ta funkcija shrani piškotek v localStorage in ga prenese na stran user_stats.html, kjer se ob pritisku "RESET MY SCORE " ta obstoječ podatek pošlje dinamično poleg URL-ja do spodnje navedenega API-ja. URL zahtevek http://93.103.156.225/reset_score/Jaka bi resetiral rezultat uporabnika "Jaka".
+1.1.6.) Šesti API se uporablja za resetiranje uporabniškega dosežka (Ang. Score). Da se ohranja seja oziroma kateri uporabnik je 
+trenutno prijavljen, se v "index.html" uporabi funkcija "WriteCookie". Ta funkcija shrani piškotek v localStorage in ga prenese 
+na stran user_stats.html, kjer se ob pritisku "RESET MY SCORE " ta obstoječ podatek pošlje dinamično poleg URL-ja do spodnje 
+navedenega API-ja. URL zahtevek http://93.103.156.225/reset_score/Jaka bi resetiral rezultat uporabnika "Jaka".
 
 
     ######  GET  ######
@@ -147,7 +157,8 @@ svoje uporabniško ime in geslo. Če se po poizvedbi podatki ujemajo, se podatki
 
 
 3.)Mobilna aplikacija je zasnovana v razvojnem okolju Android Studio in jo poganja Java. Mobilna aplikacija deluje, vendar je pri                    
-   integraciji mobilne aplikacije (Java kode) z API klici prišlo do določenih nevšečnosti. Težave so bile pri vzpostavljanju URL povezave med aktivnim Java programom in         fizičnih spletnim strežnikom, ki predstavlja zaledni del. 
+   integraciji mobilne aplikacije (Java kode) z API klici prišlo do določenih nevšečnosti. Težave so bile pri vzpostavljanju URL 
+   povezave med aktivnim Java programom in fizičnih spletnim strežnikom, ki predstavlja zaledni del. 
 
 
 4.) Navodila za testiranje
