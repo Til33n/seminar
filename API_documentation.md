@@ -247,43 +247,53 @@ all_users/Tilen                      --->            @app.get("/all_users/{input
                                                         user = input
                                                         user = show_user_data("database","users",str(user))
 '{                                   <---               return users
-           1,
-        "Tilen",
-        "geslo",
+1,
+"Tilen",
+"geslo",
 "somebodyfells@gmail.com",
-          0,
-          0
-}'
+0,
+0
+}'  
+JSON OBJECT
 Za indeksiranje glej podpoglavje 1.2.
 
 ---------------------------------------------------------------------------------------------------------------------
-
-
-@app.get("/all_users/{input}")
-async def load_user_stats(input:str):
-    user = input
-    user = show_user_data("database","users",str(user))
-    return user
-
-
----------------------------------------------------------------------------------------------------------------------
-
-
-
-@app.get("/played_rounds/{input}")
-async def load_user_stats(input:str):
-    user = input
-    user_matches = show_user_matches("database","played_rounds",str(user))
-    return user_matches
+http://93.103.156.225/
+played_rounds/username                --->            @app.get("/played_rounds/{input}")
+                                                      async def load_user_stats(input:str):
+                                                         user = input
+                                                         user_matches = show_user_matches("database","played_rounds",str(user))
+'{                                   <---                return users_matches
+"match",
+"Tilen",
+33,
+12,
+current_time
+}'
+JSON OBJECT
 
 ---------------------------------------------------------------------------------------------------------------------
-
-
-@app.get("/scores")
-async def show_scores():
-    scores = show_all_scores_chart("database","player_scores")
-    return scores
-
+http://93.103.156.225/
+scores                                --->            @app.get("/scores")
+                                                      async def show_scores():
+                                                         scores = show_all_scores_chart("database","player_scores")
+'{                                   <---                return scores
+      {
+      30,
+   "Primož",
+      4
+      },
+      
+      {
+      20,
+    "Jaka",
+      8
+      },
+      .
+      .
+      .
+}'                                                       
+JSON OBJECTS INSIDE JSON (za indeksiranje glej podpoglavje 1.2.)
 
 ---------------------------------------------------------------------------------------------------------------------
 
