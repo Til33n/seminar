@@ -100,15 +100,15 @@ navedenega API-ja. URL zahtevek http://93.103.156.225/reset_score/Jaka bi reseti
         return {"STATUS": "Score reseted successfully"}
 
 
-1.1.7.) Sedmi API se uproablja za izpis vseh zapisov za trenutno prijavljen uporabnik. V tekstni obliki podamo "user" in 
+1.1.7.) Sedmi API se uporablja za izpis vseh zapisov za trenutno prijavljen uporabnik. V tekstni obliki podamo "user" in 
         nam API vrne vse podatke za specificiranega uporabnika v JSON obliki.
         
-    ######  GET  ######
-    @app.get("/all_users/{input}")
-    async def load_user_stats(input:str):
-        user = input
-        user = show_user_data("database","users",str(user))
-        return user
+        ######  GET  ######
+        @app.get("/all_users/{input}")
+        async def load_user_stats(input:str):
+            user = input
+            user = show_user_data("database","users",str(user))
+            return user
 
 1.1.8.) Osmi API se uporablja za izpis najboljših igralcev in njihovih doseženih rezultatov. Izpiše torej od najboljšega dalje.
 
