@@ -36,11 +36,11 @@ Brisanje zapisov/uporabnikov iz podatkovne baze je omogočeno izključno adminis
 Ta se mora naknadno<br> prijaviti (glej sklop 1.1.4.)
 
      
-      ######  GET  ######
-      @app.get("/show_all_usernames")  # FETCH PLAYER SCORES
-      async def load_stats():
-          user = show_all_usernames("database")
-          return user
+          ######  GET  ######
+          @app.get("/show_all_usernames")  # FETCH PLAYER SCORES
+          async def load_stats():
+              user = show_all_usernames("database")
+              return user
 
 1.1.4.) Četrti API se uporablja za namen brisanja uporabnikov iz zapisov podatkovne baze. Če se logiramo v spletno stran user_stats.html, 
 kliknemo "USER DELETE". Tukaj<br> vnesemo uporabniško ime, katerega hočemo izbrisati. Vneseti moramo svoje administratorsko geslo. 
