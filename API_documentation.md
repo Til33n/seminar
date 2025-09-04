@@ -156,7 +156,13 @@ Zaledni del je sestavljen iz "server.py" in "database_main.py". V prvei datoteki
 4.8.)Klik "LOG_OUT" se uproabnik izpiše iz svojega računa in ga vrne nazaj na mesto prijave 
 
 
+
 5.)
+
+
+
+
+
 
 
 
