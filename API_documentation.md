@@ -108,7 +108,7 @@ navedenega API-ja. URL zahtevek http://93.103.156.225/reset_score/Jaka bi reseti
         async def load_user_stats(input:str):
             user = input
             user = show_user_data("database","users",str(user))
-            return user
+            return user        
 
 1.1.8.) Osmi API se uporablja za izpis najboljših igralcev in njihovih doseženih rezultatov. Izpiše torej od najboljšega dalje.
 
