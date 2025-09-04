@@ -53,38 +53,92 @@ Zaledni del je sestavljen iz "server.py" in "database_main.py". V prvei datoteki
             return {"STATUS": "credentials iINCORRECT"}
 
 
-1.1.5.) Peti API se pa uporablja za posodabljanje 
-
-  @app.get("/user_update")   # UPDATE USER SETTINGS 
-  async def user_update(new_email: str = "",
-                        new_password: str="",
-                        curr_user: str = "",
-                        curr_password: str = ""):
-      if(username_lookup("database", "users", str(curr_user))):
-          if(curr_user == specific_data_lookup("database", "users","username",1,curr_user)  and  curr_password == specific_data_lookup("database","users","username",2,curr_user)):
-              update_user_stats("database", curr_user, new_password, new_email)
-              return {"STATUS": "User settings updated successfully"}
+1.1.5.) Peti API se pa uporablja za posodabljanje uporabniškega računa. Če hoče uporabnik posodobiti svoje geslo in email, mora predtem vnesti             svoje uporabniško ime in geslo. Če se po poizvedbi podatki ujemajo, se podatki posodobijo v podatkovni bazi.
+    ######  GET  ######
+      @app.get("/user_update")   # UPDATE USER SETTINGS 
+      async def user_update(new_email: str = "",
+                            new_password: str="",
+                            curr_user: str = "",
+                            curr_password: str = ""):
+          if(username_lookup("database", "users", str(curr_user))):
+              if(curr_user == specific_data_lookup("database", "users","username",1,curr_user)  and  curr_password == specific_data_lookup("database","users","username",2,curr_user)):
+                  update_user_stats("database", curr_user, new_password, new_email)
+                  return {"STATUS": "User settings updated successfully"}
+              else:
+                  return {"STATUS": "Username and password INCORRECT"}
           else:
-              return {"STATUS": "Username and password INCORRECT"}
-      else:
-          return {"STATUS": "Username INCORRECT"}
+              return {"STATUS": "Username INCORRECT"}
 
 
+1.1.6.) Šesti API se uporablja za resetiranje uporabniškega dosežka (Ang. Score). Da se ohranja seja oziroma kateri uporabnik je trenutno prijavljen, se v "index.html" uporabi funkcija "WriteCookie". Ta funkcija shrani piškotek v localStorage in ga prenese na stran user_stats.html, kjer se ob pritisku "RESET MY SCORE " ta obstoječ podatek pošlje dinamično poleg URL-ja do spodnje navedenega API-ja. URL zahtevek http://93.103.156.225/reset_score/Jaka bi resetiral rezultat uporabnika "Jaka".
 
 
-1.1.6.) Šesti API
-1.1.7.) Sedmi API
-1.1.8.) Osmi API
-1.1.9.) Deveti API
+    ######  GET  ######
+    @app.get("/score_reset/{input}")   # SCORE RESET 
+    async def score_reset(input:str):
+        username = input
+        highest_score = 0
+        played_matches= 0
+        delete_user("database", "player_scores", username)
+        update_user_score("database", username, highest_score, played_matches)  
+        return {"STATUS": "Score reseted successfully"}
 
 
+1.1.7.) Sedmi API se uproablja za izpis vseh zapisov za trenutno prijavljen uporabnik. V tekstni obliki podamo "user" in 
+        nam API vrne vse podatke za specificiranega uporabnika v JSON obliki.
+        
+    ######  GET  ######
+    @app.get("/all_users/{input}")
+    async def load_user_stats(input:str):
+        user = input
+        user = show_user_data("database","users",str(user))
+        return user
 
+1.1.8.) Osmi API se uporablja za izpis najboljših igralcev in njihovih doseženih rezultatov. Izpiše torej od najboljšega dalje.
 
+    ######  GET  ######
+    @app.get("/scores")
+    async def show_scores():
+        scores = show_all_scores_chart("database","player_scores")
+        return scores
 
-
+1.1.X.) Poleg navedenih API-jev imamo v "server.py" še PUT, POST in DELETE. Ti sprejemajo JSON objekte in delujejo na Postman.
+        Integracija HTML-ja z preostalimi API klici je povzročalo precejšne težave in nestabilnost aplikacije.
 
 1.2.) back_end - database_main.py
+        V tej datoteki imamo vse pripadajoče funkcija za opravljanje/branje/pisanje v naše podatkovne baze. Imamo 2 podatkovni bazi in sicer
+        "database.db" in "exec_database.db". Prva je uporabljena za uporabniške račune medtem ko druga pa za administratorske podatke.
 
+            ### database.db ###
+            #users(
+            #username TEXT PRIMARY KEY,
+            #password TEXT,
+            #email TEXT,
+            #highest_score INT,
+            #played_matches INT)
+            
+            #played_rounds(
+            #match_ID text, 
+            #username text,
+            #time_played INT,
+            #score INT,
+            #current_time INT,
+            #FOREIGN KEY(username) REFERENCES users(username))
+            
+            #player_scores (
+            #username text,
+            ##highest_score INT,
+            #time_played INT )
+
+            ### exec_database.db ###
+            #admins(
+            #username TEXT PRIMARY KEY,
+            #password TEXT
 
 
 2.) front_end
+        Za prednji del smo uporabili programski jezik html. Z pomočjo dveh datotek "index.html" in "user_stats.html" vršimo API klice (glej               podpoglavja 1.1.1. - 1.1.X.) na naš strežnik. Spletna stran mobilne aplikacije je dostopna na spletnem naslovu http://93.103.156.225
+
+
+3.) mobilna aplikacija
+        Mobilna aplikacija je zasnovana v razvojnem okolju Android Studio in jo poganja Java. Mobilna aplikacija deluje, vendar je pri                    integraciji mobilne aplikacije (Java kode) z API klici prišlo do določenih nevšečnosti.  
