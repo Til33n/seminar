@@ -12,7 +12,10 @@ Zaledni del je sestavljen iz "server.py" in "database_main.py". V prvei datoteki
     async def root():
         return FileResponse('index.html', media_type='text/html')
    
-1.1.2.)Drugi API se pa uporabi za preverjanje verodostojnosti podatkov. Na spletni strani index.html, uporabnik vnese svoje uporabniško ime in            geslo. Z pritiskom gumba (Submit) se podatki preko URL-ja pošljejo na spodaj podan API. API sproži set funkcij, ki pošljejo poizvedbo v            podatkovno bazo prvo se preveri če uporabnik z podanim uporabniškim imenom obstaja, če ja, preveri še geslo. Če sta obe poizvedbi                  "True", potem API uporabnika preusmeri na spletno stran "game_stats.html" 
+1.1.2.)Drugi API se pa uporabi za preverjanje verodostojnosti podatkov. Na spletni strani index.html, uporabnik vnese svoje uporabniško ime in <br>            
+geslo. Z pritiskom gumba (Submit) se podatki preko URL-ja pošljejo na spodaj podan API. API sproži set funkcij, ki pošljejo poizvedbo v <br> 
+podatkovno bazo prvo se preveri če uporabnik z podanim uporabniškim imenom obstaja, če ja, preveri še geslo. Če sta obe poizvedbi <br>           
+"True", potem API uporabnika preusmeri na spletno stran "game_stats.html" 
 
     ######  GET  #######
     @app.get("/login")   # LOGIN 
@@ -27,7 +30,7 @@ Zaledni del je sestavljen iz "server.py" in "database_main.py". V prvei datoteki
         return FileResponse('index.html', media_type='text/html')
         
 
-1.1.3.) Tretji API se uporablja izključno za poizvedbo vseh trenutno registriranih uporabnikov spletne strani. Vrne nam uporabniška imena v obliki JSON. Ta poizvedba se uporablja za namen brisanja uporabnikov. Brisanje zapisov/uporabnikov iz podatkovne baze je omogočeno izključno administratorju spletne strani. Ta se mora naknadno prijaviti (glej sklop 1.1.4.)
+1.1.3.) Tretji API se uporablja izključno za poizvedbo vseh trenutno registriranih uporabnikov spletne strani. Vrne nam uporabniška imena v obliki JSON. Ta poizvedba se<br> uporablja za namen brisanja uporabnikov. Brisanje zapisov/uporabnikov iz podatkovne baze je omogočeno izključno administratorju spletne strani. Ta se mora naknadno<br> prijaviti (glej sklop 1.1.4.)
      
       ######  GET  ######
       @app.get("/show_all_usernames")  # FETCH PLAYER SCORES
@@ -35,7 +38,7 @@ Zaledni del je sestavljen iz "server.py" in "database_main.py". V prvei datoteki
           user = show_all_usernames("database")
           return user
 
-1.1.4.) Četrti API se uporablja za namen brisanja uporabnikov iz zapisov podatkovne baze. Če se logiramo v spletno stran user_stats.html, kliknemo "USER DELETE". Tukaj vnesemo uporabniško ime, katerega hočemo izbrisati. Vneseti moramo svoje administratorsko geslo. (POGOJ ZA ADMINISTRATORJA   je obstoječ račun uporabnika - ISTA OSEBA). Z pomočjo "html form" vnesemo tri podatke (String), API preveri če se vsi podatki ujemajo v podatkovnih bazah in izvede izbris uporabnika. 
+1.1.4.) Četrti API se uporablja za namen brisanja uporabnikov iz zapisov podatkovne baze. Če se logiramo v spletno stran user_stats.html, kliknemo "USER DELETE". Tukaj<br> vnesemo uporabniško ime, katerega hočemo izbrisati. Vneseti moramo svoje administratorsko geslo. (POGOJ ZA ADMINISTRATORJA   je obstoječ račun uporabnika - ISTA OSEBA).<br> Z pomočjo "html form" vnesemo tri podatke (String), API preveri če se vsi podatki ujemajo v podatkovnih bazah in izvede izbris uporabnika.<br> 
 
     ######  GET  ######
     @app.get("/delete")   # ADMIN LOGIN and USER DELETE
@@ -53,7 +56,8 @@ Zaledni del je sestavljen iz "server.py" in "database_main.py". V prvei datoteki
             return {"STATUS": "credentials iINCORRECT"}
 
 
-1.1.5.) Peti API se pa uporablja za posodabljanje uporabniškega računa. Če hoče uporabnik posodobiti svoje geslo in email, mora predtem vnesti             svoje uporabniško ime in geslo. Če se po poizvedbi podatki ujemajo, se podatki posodobijo v podatkovni bazi.
+1.1.5.) Peti API se pa uporablja za posodabljanje uporabniškega računa. Če hoče uporabnik posodobiti svoje geslo in email, mora predtem vnesti<br>    
+svoje uporabniško ime in geslo. Če se po poizvedbi podatki ujemajo, se podatki posodobijo v podatkovni bazi.<br>
 
 
         ######  GET  ######
