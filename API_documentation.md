@@ -145,3 +145,25 @@ Zaledni del je sestavljen iz "server.py" in "database_main.py". V prvei datoteki
 
 
 4.) Navodila za testiranje
+4.0.)http://93.103.156.225
+4.1.)Username = Tilen  &  Password = geslo
+4.2.)Dvojni klik na "OK"
+4.3.)Klik "SHOW_SCORES" nam prikaže dosežene rezultate (klik <--)
+4.4.)Klik "USER_STATS" nam prikaže naše parametre in pdoobno (klik <--)
+4.5.)Klik "UPDATE_STATS" nam nudi možnost posodobitve, tukaj lahko spremenimo naprimer email in rpeverimo njegovo delovanje
+4.6.)Klik "RESET_MY_SCORE" nam ponastavi dosežen rezultat (klik <--)
+4.7.)Klik "DELETE_USER" omogoča administratorju izbris uporabnika  [ADMIN = admin, PASSWORD = admin_password, Delete user = Jaka] (klik <--) 
+4.8.)Klik "LOG_OUT" se uproabnik izpiše iz svojega računa in ga vrne nazaj na mesto prijave 
+
+
+5.)
+
+
+
+
+'{
+"name":"John",
+"age":30,
+"car":null
+}'
+
