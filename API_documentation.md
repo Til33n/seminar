@@ -142,3 +142,6 @@ Zaledni del je sestavljen iz "server.py" in "database_main.py". V prvei datoteki
 
 
 3.)Mobilna aplikacija je zasnovana v razvojnem okolju Android Studio in jo poganja Java. Mobilna aplikacija deluje, vendar je pri                    integraciji mobilne aplikacije (Java kode) z API klici prišlo do določenih nevšečnosti. Težave so bile pri vzpostavljanju URL povezave med aktivnim Java programom in fizičnih spletnim strežnikom, ki predstavlja zaledni del. 
+
+
+4.) Navodila za testiranje
