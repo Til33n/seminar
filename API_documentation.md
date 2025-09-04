@@ -12,7 +12,7 @@ Zaledni del je sestavljen iz "server.py" in "database_main.py". V prvei datoteki
     async def root():
         return FileResponse('index.html', media_type='text/html')
    
-    1.1.2.)Drugi API se pa uporabi za preverjanje verodostojnosti podatkov. Na spletni strani index.html, uporabnik vnese svoje uporabniško ime in            geslo. Z pritiskom gumba (Submit) se podatki preko URL-ja pošljejo na spodaj podan API. API sproži set funkcij, ki pošljejo poizvedbo v            podatkovno bazo prvo se preveri če uporabnik z podanim uporabniškim imenom obstaja, če ja, preveri še geslo. Če sta obe poizvedbi                  "True", potem API uporabnika preusmeri na spletno stran "game_stats.html" 
+1.1.2.)Drugi API se pa uporabi za preverjanje verodostojnosti podatkov. Na spletni strani index.html, uporabnik vnese svoje uporabniško ime in            geslo. Z pritiskom gumba (Submit) se podatki preko URL-ja pošljejo na spodaj podan API. API sproži set funkcij, ki pošljejo poizvedbo v            podatkovno bazo prvo se preveri če uporabnik z podanim uporabniškim imenom obstaja, če ja, preveri še geslo. Če sta obe poizvedbi                  "True", potem API uporabnika preusmeri na spletno stran "game_stats.html" 
 
     ######  GET  #######
     @app.get("/login")   # LOGIN 
@@ -54,22 +54,24 @@ Zaledni del je sestavljen iz "server.py" in "database_main.py". V prvei datoteki
 
 
 1.1.5.) Peti API se pa uporablja za posodabljanje uporabniškega računa. Če hoče uporabnik posodobiti svoje geslo in email, mora predtem vnesti             svoje uporabniško ime in geslo. Če se po poizvedbi podatki ujemajo, se podatki posodobijo v podatkovni bazi.
-    ######  GET  ######
-      @app.get("/user_update")   # UPDATE USER SETTINGS 
-      async def user_update(new_email: str = "",
-                            new_password: str="",
-                            curr_user: str = "",
-                            curr_password: str = ""):
-          if(username_lookup("database", "users", str(curr_user))):
-              if(curr_user == specific_data_lookup("database", "users","username",1,curr_user)  and  curr_password == specific_data_lookup("database","users","username",2,curr_user)):
-                  update_user_stats("database", curr_user, new_password, new_email)
-                  return {"STATUS": "User settings updated successfully"}
-              else:
-                  return {"STATUS": "Username and password INCORRECT"}
+
+
+        ######  GET  ######
+        @app.get("/user_update")   # UPDATE USER SETTINGS 
+        async def user_update(new_email: str = "",
+                        new_password: str="",
+                        curr_user: str = "",
+                        curr_password: str = ""):
+        if(username_lookup("database", "users", str(curr_user))):
+          if(curr_user == specific_data_lookup("database", "users","username",1,curr_user)  and  curr_password == specific_data_lookup("database","users","username",2,curr_user)):
+              update_user_stats("database", curr_user, new_password, new_email)
+              return {"STATUS": "User settings updated successfully"}
           else:
-              return {"STATUS": "Username INCORRECT"}
-
-
+              return {"STATUS": "Username and password INCORRECT"}
+        else:
+          return {"STATUS": "Username INCORRECT"}
+        
+        
 1.1.6.) Šesti API se uporablja za resetiranje uporabniškega dosežka (Ang. Score). Da se ohranja seja oziroma kateri uporabnik je trenutno prijavljen, se v "index.html" uporabi funkcija "WriteCookie". Ta funkcija shrani piškotek v localStorage in ga prenese na stran user_stats.html, kjer se ob pritisku "RESET MY SCORE " ta obstoječ podatek pošlje dinamično poleg URL-ja do spodnje navedenega API-ja. URL zahtevek http://93.103.156.225/reset_score/Jaka bi resetiral rezultat uporabnika "Jaka".
 
 
@@ -136,9 +138,7 @@ Zaledni del je sestavljen iz "server.py" in "database_main.py". V prvei datoteki
             #password TEXT
 
 
-2.) front_end
-        Za prednji del smo uporabili programski jezik html. Z pomočjo dveh datotek "index.html" in "user_stats.html" vršimo API klice (glej               podpoglavja 1.1.1. - 1.1.X.) na naš strežnik. Spletna stran mobilne aplikacije je dostopna na spletnem naslovu http://93.103.156.225
+2.)Za prednji del smo uporabili programski jezik html. Z pomočjo dveh datotek "index.html" in "user_stats.html" vršimo API klice (glej               podpoglavja 1.1.1. - 1.1.X.) na naš strežnik. Spletna stran mobilne aplikacije je dostopna na spletnem naslovu http://93.103.156.225
 
 
-3.) mobilna aplikacija
-        Mobilna aplikacija je zasnovana v razvojnem okolju Android Studio in jo poganja Java. Mobilna aplikacija deluje, vendar je pri                    integraciji mobilne aplikacije (Java kode) z API klici prišlo do določenih nevšečnosti.  
+3.)Mobilna aplikacija je zasnovana v razvojnem okolju Android Studio in jo poganja Java. Mobilna aplikacija deluje, vendar je pri                    integraciji mobilne aplikacije (Java kode) z API klici prišlo do določenih nevšečnosti. Težave so bile pri vzpostavljanju URL povezave med aktivnim Java programom in fizičnih spletnim strežnikom, ki predstavlja zaledni del. 
