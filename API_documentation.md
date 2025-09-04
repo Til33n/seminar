@@ -315,19 +315,19 @@ input: JSON                                                 password:       str
 new user data received                 <---                 return {"STATUS": "user data received"}
 
 ---------------------------------------------------------------------------------------------------------------------
-                                                        ######  POST  #######
-                                                        class Item_2(BaseModel):
-                                                            username:       str
-                                                            highest_score:  int
-                                                            time_played:    int
-                                                        @app.post("/add_match")
-                                                        def handle_json_2(item: Item_2):
-                                                            item = jsonable_encoder(item)
-                                                            username =      item["username"]
+http://93.103.156.225/                     --->         ######  POST  #######
+add_match                                               class Item_2(BaseModel):
+method:POST                                                 username:       str
+input:JSON                                                  highest_score:  int
+'{                                                          time_played:    int
+"username":"Tilen",                                     @app.post("/add_match")
+"highest_score":30,                                     def handle_json_2(item: Item_2):
+"time_played": 13                                           item = jsonable_encoder(item)
+ }'                                                         username =      item["username"]
                                                             highest_score = item["highest_score"]
                                                             time_played =   item["time_played"]
                                                             add_player_score("database","player_scores", username, highest_score, time_played)
-                                                            return {"STATUS": "match data received"}
+ new match data received                   <---             return {"STATUS": "match data received"}
 
 ---------------------------------------------------------------------------------------------------------------------
                                                         ######  PUT  #######
@@ -347,8 +347,7 @@ new user data received                 <---                 return {"STATUS": "u
                                                             played_matches =   item["played_matches"]
                                                             update_user("database", username, password ,email ,highest_score ,played_matches)
                                                             return {"STATUS": "user update received"}
-
-
+                                                            
 ---------------------------------------------------------------------------------------------------------------------
                                                             ######  PUT  #######
                                                             class Item_3(BaseModel):
@@ -373,11 +372,6 @@ method: DELETE                                              @app.delete("/{input
 deletes username "Primož"             <---                      return{"STATUS": "user removed from users"}
 
 ---------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
 
 
 
