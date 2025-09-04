@@ -186,7 +186,7 @@ http://93.103.156.255
                                           async def login(user: str = "",
                                                           password: str = ""):
                                                 if(username_lookup("database", "users", str(user))):
-                                                    if(user == specific_data_lookup("database", "users","username",1,user)  and  password ==                                                                 specific_data_lookup("database","users","username",2,user)):      
+                                                    if(user == specific_data_lookup("database", "users","username",1,user)  and  password ==                                 specific_data_lookup("database","users","username",2,user)):      
                                                            return FileResponse('game_stats.html', media_type='text/html')
                                                      else:
                                                            return FileResponse('index.html', media_type='text/html')
@@ -216,7 +216,7 @@ delete_u=Anze        --->    @app.get("/delete")   # ADMIN LOGIN and USER DELETE
                                                           delete_u: str = ""):
                                         if(username_lookup("exec_database", "admins", str(admin))):
                                             #return {"STATUS": "1"}
-                                            if(admin == specific_data_lookup("exec_database", "admins","username",1,admin)  and  password ==                                                      specific_data_lookup("exec_database","admins","username",2,admin)): 
+                                            if(admin == specific_data_lookup("exec_database", "admins","username",1,admin)  and  password ==                      specific_data_lookup("exec_database","admins","username",2,admin)): 
                                                 delete_user("database", "users", delete_u)
                                                 return {"STATUS": "User deleted successfully"}
                                             else:
@@ -235,7 +235,7 @@ curr_password=password            --->            @app.get("/user_update")   # U
                                                                         curr_user: str = "",
                                                                         curr_password: str = ""):
                                                     if(username_lookup("database", "users", str(curr_user))):
-                                                        if(curr_user == specific_data_lookup("database", "users","username",1,curr_user)  and                                                                 curr_password == specific_data_lookup("database","users","username",2,curr_user)):
+                                                        if(curr_user == specific_data_lookup("database", "users","username",1,curr_user)  and                        curr_password == specific_data_lookup("database","users","username",2,curr_user)):
                                                             update_user_stats("database", curr_user, new_password, new_email)
                                                             return {"STATUS": "User settings updated successfully"}
                                                         else:
@@ -328,7 +328,7 @@ input: JSON                                                 password:       str
                                                             email =          item["email"]
                                                             highest_score =  item["highest_score"]
                                                             played_matches = item["played_matches"]
-                                                            add_data("database","users", username , password, email, highest_score,                                                                                    played_matches)
+                                                            add_data("database","users", username , password, email, highest_score,                                         played_matches)
 new user data received                 <---                 return {"STATUS": "user data received"}
 
 ---------------------------------------------------------------------------------------------------------------------
