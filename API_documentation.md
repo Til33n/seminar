@@ -330,37 +330,35 @@ input:JSON                                                  highest_score:  int
  new match data received                   <---             return {"STATUS": "match data received"}
 
 ---------------------------------------------------------------------------------------------------------------------
-                                                        ######  PUT  #######
-                                                        class Item_3(BaseModel):
-                                                            password:       str
-                                                            email:          str
-                                                            highest_score:  int
-                                                            played_matches: int
-                                                        #@app.put("/update_user/{input}")
-                                                        @app.put("{input}")
-                                                        def handle_json_3(item: Item_3, input: str =""):
-                                                            item = jsonable_encoder(item)
-                                                            username =      input
+http://93.103.156.225/                                 ######  PUT  #######
+/update_user/Tilen                                     class Item_3(BaseModel):
+method:PUT                                                  password:       str
+input:JSON                                                  email:          str
+'{                                                          highest_score:  int
+"password":"geslo",                                         played_matches: int
+"email":"someone@gmail.com,                             @app.put("/update_user/{input}")
+"highest_score": 24                                     def handle_json_3(item: Item_3, input: str =""):
+"played_matches": 13                                        item = jsonable_encoder(item)
+}'                                                          username =      input
                                                             password  =     item["password"]
                                                             email =         item["email"]
                                                             highest_score = item["highest_score"]
                                                             played_matches =   item["played_matches"]
                                                             update_user("database", username, password ,email ,highest_score ,played_matches)
-                                                            return {"STATUS": "user update received"}
+ updates existing "Tilen" stats          <---               return {"STATUS": "user update received"}
                                                             
 ---------------------------------------------------------------------------------------------------------------------
-                                                            ######  PUT  #######
-                                                            class Item_3(BaseModel):
-                                                                user:   str
-                                                                score:  int
-                                                            @app.put("{input}")
-                                                            def handle_json_3(item: Item_3, input: str =""):
-                                                                item = jsonable_encoder(item)
-                                                                user =  item["user"]
-                                                                score = item["score"]
-                                                                played_matches = 0
-                                                                update_user_score("database", user, score, played_matches)  
-                                                                return {"STATUS": "user score updated"}
+http://93.103.156.225/Tilen                            ######  PUT  #######
+                                                       class Item_3(BaseModel):
+method: PUT                                                  score:  int
+input: JSON                                             @app.put("{input}")     
+'{                                                      def handle_json_3(item: Item_3, input: str =""):
+"score": 99                                                  item = jsonable_encoder(item)
+}'                                                           user =  input                                                             
+                                                             score = item["score"]
+                                                             played_matches = 0
+                                                             update_user_score("database", user, score, played_matches)  
+                                                             return {"STATUS": "user score updated"}
 
 ---------------------------------------------------------------------------------------------------------------------
 http://93.103.156.225/
@@ -373,11 +371,4 @@ deletes username "Primož"             <---                      return{"STATUS"
 
 ---------------------------------------------------------------------------------------------------------------------
 
-
-
-'{
-"name":"John",
-"age":30,
-"car":null
-}'
 
