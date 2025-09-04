@@ -138,7 +138,7 @@ Zaledni del je sestavljen iz "server.py" in "database_main.py". V prvei datoteki
             #password TEXT
 
 
-2.)Za prednji del smo uporabili programski jezik html. Z pomočjo dveh datotek "index.html" in "user_stats.html" vršimo API klice (glej               podpoglavja 1.1.1. - 1.1.X.) na naš strežnik. Spletna stran mobilne aplikacije je dostopna na spletnem naslovu http://93.103.156.225
+2.)Za prednji del smo uporabili programski jezik HTML. Z pomočjo dveh datotek "index.html" in "user_stats.html" vršimo API klice (glej              podpoglavja 1.1.1. - 1.1.X.). Spletna stran mobilne aplikacije je dostopna na spletnem naslovu http://93.103.156.225
 
 
 3.)Mobilna aplikacija je zasnovana v razvojnem okolju Android Studio in jo poganja Java. Mobilna aplikacija deluje, vendar je pri                    integraciji mobilne aplikacije (Java kode) z API klici prišlo do določenih nevšečnosti. Težave so bile pri vzpostavljanju URL povezave med aktivnim Java programom in fizičnih spletnim strežnikom, ki predstavlja zaledni del. 
