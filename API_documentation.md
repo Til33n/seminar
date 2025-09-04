@@ -296,93 +296,81 @@ scores                                --->            @app.get("/scores")
 JSON OBJECTS INSIDE JSON (za indeksiranje glej podpoglavje 1.2.)
 
 ---------------------------------------------------------------------------------------------------------------------
-
-
-######  POST  #######
-class Item_1(BaseModel):
-    username:       str
-    password:       str
-    email:          str
-    highest_score:  int
-    played_matches: int
-@app.post("/add_user")
-def handle_json_1(item: Item_1):
-    item = jsonable_encoder(item)
-    username =       item["username"]
-    password =       item["password"]
-    email =          item["email"]
-    highest_score =  item["highest_score"]
-    played_matches = item["played_matches"]
-    add_data("database","users", username , password, email, highest_score, played_matches)
-    return {"STATUS": "user data received"}
+http://93.103.156.225/             --->             ######  POST  #######
+add_user                                                class Item_1(BaseModel):
+method: POST                                                username:       str
+input: JSON                                                 password:       str
+'{                                                          email:          str
+"username":"Tilen",                                         highest_score:  int
+"password":"geslo",                                         played_matches: int
+"email":"something@gmail.com",                           @app.post("/add_user")
+"highest_score":0,                                       def handle_json_1(item: Item_1):                
+"played_matches":0                                          item = jsonable_encoder(item)
+}'                                                          username =       item["username"]
+                                                            password =       item["password"]
+                                                            email =          item["email"]
+                                                            highest_score =  item["highest_score"]
+                                                            played_matches = item["played_matches"]
+                                                            add_data("database","users", username , password, email, highest_score,                                                                                    played_matches)
+new user data received                 <---                 return {"STATUS": "user data received"}
 
 ---------------------------------------------------------------------------------------------------------------------
-
-
-class Item_2(BaseModel):
-    username:       str
-    highest_score:  int
-    time_played:    int
-@app.post("/add_match")
-def handle_json_2(item: Item_2):
-    item = jsonable_encoder(item)
-    username =      item["username"]
-    highest_score = item["highest_score"]
-    time_played =   item["time_played"]
-    add_player_score("database","player_scores", username, highest_score, time_played)
-    return {"STATUS": "match data received"}
+                                                        ######  POST  #######
+                                                        class Item_2(BaseModel):
+                                                            username:       str
+                                                            highest_score:  int
+                                                            time_played:    int
+                                                        @app.post("/add_match")
+                                                        def handle_json_2(item: Item_2):
+                                                            item = jsonable_encoder(item)
+                                                            username =      item["username"]
+                                                            highest_score = item["highest_score"]
+                                                            time_played =   item["time_played"]
+                                                            add_player_score("database","player_scores", username, highest_score, time_played)
+                                                            return {"STATUS": "match data received"}
 
 ---------------------------------------------------------------------------------------------------------------------
-
-
-
-######  PUT  #######
-class Item_3(BaseModel):
-    password:       str
-    email:          str
-    highest_score:  int
-    played_matches: int
-#@app.put("/update_user/{input}")
-@app.put("{input}")
-def handle_json_3(item: Item_3, input: str =""):
-    item = jsonable_encoder(item)
-    username =      input
-    password  =     item["password"]
-    email =         item["email"]
-    highest_score = item["highest_score"]
-    played_matches =   item["played_matches"]
-    update_user("database", username, password ,email ,highest_score ,played_matches)
-    return {"STATUS": "user update received"}
+                                                        ######  PUT  #######
+                                                        class Item_3(BaseModel):
+                                                            password:       str
+                                                            email:          str
+                                                            highest_score:  int
+                                                            played_matches: int
+                                                        #@app.put("/update_user/{input}")
+                                                        @app.put("{input}")
+                                                        def handle_json_3(item: Item_3, input: str =""):
+                                                            item = jsonable_encoder(item)
+                                                            username =      input
+                                                            password  =     item["password"]
+                                                            email =         item["email"]
+                                                            highest_score = item["highest_score"]
+                                                            played_matches =   item["played_matches"]
+                                                            update_user("database", username, password ,email ,highest_score ,played_matches)
+                                                            return {"STATUS": "user update received"}
 
 
 ---------------------------------------------------------------------------------------------------------------------
-
-
-######  PUT  #######
-class Item_3(BaseModel):
-    user:   str
-    score:  int
-@app.put("{input}")
-def handle_json_3(item: Item_3, input: str =""):
-    item = jsonable_encoder(item)
-    user =  item["user"]
-    score = item["score"]
-    played_matches = 0
-    update_user_score("database", user, score, played_matches)  
-    return {"STATUS": "user score updated"}
+                                                            ######  PUT  #######
+                                                            class Item_3(BaseModel):
+                                                                user:   str
+                                                                score:  int
+                                                            @app.put("{input}")
+                                                            def handle_json_3(item: Item_3, input: str =""):
+                                                                item = jsonable_encoder(item)
+                                                                user =  item["user"]
+                                                                score = item["score"]
+                                                                played_matches = 0
+                                                                update_user_score("database", user, score, played_matches)  
+                                                                return {"STATUS": "user score updated"}
 
 ---------------------------------------------------------------------------------------------------------------------
-
-
-    
-######  DELETE  #######
-#@app.delete("/remove/{input}")
-@app.delete("{input}")
-async def delete_record(input: str = ""):
-    user = input
-    delete_user("database", "users", str(user))
-    return{"STATUS": "user removed from users"}
-
+http://93.103.156.225/
+Primož                                 --->                 ######  DELETE  #######
+method: DELETE                                              @app.delete("/{input}")
+                                                            async def delete_record(input: str = ""):
+                                                                user = input
+                                                                delete_user("database", "users", str(user))
+deletes username "Primož"             <---                      return{"STATUS": "user removed from users"}
 
 ---------------------------------------------------------------------------------------------------------------------
 
